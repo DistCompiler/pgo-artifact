@@ -1,0 +1,30 @@
+[
+    {
+        "userName": "vagrant",
+        "name": "azbench-pgobench-1-vm-client",
+        "computerName": "client",
+        "primaryPublicIPAddress": "192.168.56.10",
+        "primaryPrivateIPAddress": "192.168.56.10"
+    },
+    {
+        "userName": "vagrant",
+        "name": "azbench-pgobench-1-vm-1",
+        "computerName": "vm-1",
+        "primaryPublicIPAddress": "192.168.56.11",
+        "primaryPrivateIPAddress": "192.168.56.11"
+    },
+    {
+        "userName": "vagrant",
+        "name": "azbench-pgobench-1-vm-2",
+        "computerName": "vm-2",
+        "primaryPublicIPAddress": "192.168.56.12",
+        "primaryPrivateIPAddress": "192.168.56.12"
+    },
+    {
+        "userName": "vagrant",
+        "name": "azbench-pgobench-1-vm-3",
+        "computerName": "vm-3",
+        "primaryPublicIPAddress": "192.168.56.13",
+        "primaryPrivateIPAddress": "192.168.56.13"
+    }
+]
