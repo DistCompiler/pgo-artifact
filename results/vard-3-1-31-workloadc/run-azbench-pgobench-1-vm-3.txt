@@ -1,3 +1,0 @@
-Compiling /home/azbench/image/run_vard_server.sc
-unordered shim running setup for VarD
-unordered shim ready for action
