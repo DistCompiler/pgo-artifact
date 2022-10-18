@@ -28,3 +28,6 @@
 [submodule "image/roshiapp"]
 	path = image/roshiapp
 	url = https://github.com/DistCompiler/roshiapp.git
+[submodule "azbench"]
+	path = azbench
+	url = https://github.com/fhackett/azurebench.git
