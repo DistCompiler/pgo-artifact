@@ -1,10 +1,8 @@
 # PGo Benchmarks
 
-This repository aggregates all the tools and data necessary to reproduce our evaluation of PGo in our ASPLOS 2022 paper.
+This repository aggregates all the tools and data necessary to reproduce the results in the evaluation section of our ASPLOS 2023 paper.
 
-Our artifact has two components.
-We provide the PGo compiler itself, which can compile MPCal specifications, and we also provide a method for reproducing our performance results from our ASPLOS 2023 paper.
-These files describe how to reproduce our performance results.
+Our artifact has two components. We provide the PGo compiler itself, which can compile MPCal specifications, and we also provide a method for reproducing our performance results from our ASPLOS 2023 paper. These files describe how to reproduce our performance results.
 
 ## Description
 
@@ -12,13 +10,13 @@ Our benchmark runner is a pre-compiled collection of JAR files runnable on Linux
 Its source code is provided in the `azbench/` folder.
 
 The benchmark runner machines, which will be controlled by the benchmark runner, require that a large number of dependencies be installed.
-This installation is automated via the script `image/provision.sh`, assumed to be run in the context of Ubuntu 20.04 with the current directory set to a copy of the `image/` directory.
+This installation is automated via the script `image/provision.sh`, which is assumed to be run in the context of Ubuntu 20.04 with the current directory set to a copy of the `image/` directory.
 This script lists full dependencies and build steps for all our systems and all the related work against which we evaluate, resulting in a directory containing compiled versions of all necessary artifacts.
 
 ### How to access
 
 Clone the repository as shown below, recursing over submodules.
-Some but not all dependencies are included as submodules.
+Some, but not all, dependencies are included as submodules.
 
 ```bash
 $ git clone --recurse-submodules https://github.com/DistCompiler/pgo-artifact
@@ -37,7 +35,7 @@ Given that requiring Azure credits is not ideal, we also support two other modes
 - To realistically recreate our measurements, we recommend using multiple machines and a real network.
   We do not provide automation support for doing this without Azure, but we instead document the required overrides to our experiment runner as well as how to run the installer scripts for our dependencies manually.
 
-  It may also be viable to re-use the Vagrant VMs we provide by placing them on different servers, but we have not investigated how to specifically do that.
+It may also be viable to re-use the Vagrant VMs we provide by placing them on different servers, but we have not investigated how to specifically do that.
 
 ### Software dependencies
 
@@ -53,12 +51,13 @@ Our provisioning script, in the context of Ubuntu 20.04, should be considered au
 ## Installation
 
 Our installation process has three variations, each of which has a tradeoff in terms of faithfulness to our original setup, ease of use, and financial investment.
+
 In all cases, the included benchmark runner `./azurebench` will run all the experiments listed in `experiments.json` and deposit the results in `results/`.
 
 ### Manage machines with Vagrant
 
 This is the easiest solution to setup, as it launches all the required servers as VMs on the local machine with Vagrant.
-Because all the servers run on a single machine, it is unlikely to produce useful results.
+Because all the servers run on a single machine, it is unlikely to produce useful results for distributed systems we evaluate.
 We provide this mode as an easy way to check the integrity of our scripts and see that the experiments can be run at all.
 To use this mode, first install Vagrant and VirtualBox in order to be able to manage VMs.
 On Ubuntu, the following command should install appropriate versions of the required software:
@@ -96,7 +95,7 @@ $ ./azurebench .
 
 ### Manage machines with Azure
 
-Given the funds, the most accurate method to reproduce our results is to run experiments on Microsoft Azure servers.
+Given sufficient funds, the most accurate method to reproduce our results is to run experiments on Microsoft Azure servers. 
 
 To do this, install Azure CLI https://learn.microsoft.com/en-us/cli/azure/install-azure-cli, and log in using the account and tenant to which you intend to charge experiments.
 Note down your tenant ID and your subscription ID.
