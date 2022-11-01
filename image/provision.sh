@@ -86,6 +86,10 @@ pushd pgo/systems/shopcart
 make build
 popd
 
+pushd pgo/systems/pbkvs
+make build
+popd
+
 pushd go-ycsb
 make
 popd
