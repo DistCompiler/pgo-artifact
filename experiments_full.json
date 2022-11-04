@@ -254,6 +254,34 @@
           "workload": "workloada"
         }
       ]
+    },
+    {
+      "name": "redis",
+      "clientCmd": "./amm go_ycsb_redis.sc",
+      "serverCmd": "./amm run_redis_server.sc",
+      "excludeConfigKeys": ["operationCount"],
+      "config": [
+        {
+          "serverCount": 3,
+          "operationCount": 1000000,
+          "threadCount": [80],
+          "workload": "workloada"
+        }
+      ]
+    },
+    {
+      "name": "pbkvs",
+      "clientCmd": "./amm go_ycsb_pbkvs.sc",
+      "serverCmd": "./amm run_pbkvs_server.sc",
+      "excludeConfigKeys": ["operationCount"],
+      "config": [
+        {
+          "serverCount": 3,
+          "operationCount": 10000,
+          "threadCount": [25, 30],
+          "workload": "workloada"
+        }
+      ]
     }
   ]
 }
