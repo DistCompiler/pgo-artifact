@@ -74,31 +74,31 @@
         {
           "serverCount": 3,
           "operationCount": 10000,
-          "threadCount": [8, 12, 16, 24, 32, 40, 48, 56, 60],
+          "threadCount": [8, 12, 16],
           "workload": "workloada"
         },
         {
           "serverCount": 3,
           "operationCount": 10000,
-          "threadCount": [48, 56, 60],
+          "threadCount": [8, 16],
           "workload": ["workloadb", "workloadc", "workloadd", "workloadf"]
         },
         {
           "serverCount": 5,
           "operationCount": 10000,
-          "threadCount": [42, 48, 56],
+          "threadCount": [8, 12],
           "workload": "workloada"
         },
         {
           "serverCount": 7,
           "operationCount": 10000,
-          "threadCount": [42, 48, 52],
+          "threadCount": [8, 12],
           "workload": "workloada"
         },
         {
           "serverCount": 9,
           "operationCount": 10000,
-          "threadCount": [42, 48],
+          "threadCount": [8, 12],
           "workload": "workloada"
         }
       ]
