@@ -282,6 +282,26 @@
           "workload": "workloada"
         }
       ]
+    },
+    {
+      "name": "vard",
+      "clientCmd": "./amm ycsb_vard.sc",
+      "serverCmd": "./amm run_vard_server.sc",
+      "excludeConfigKeys": ["operationCount"],
+      "config": [
+        {
+          "serverCount": 3,
+          "operationCount": 2000,
+          "threadCount": [26, {"from":  11, "to":  51, "step":  10}],
+          "workload" : "workloada"
+        },
+        {
+          "serverCount": 3,
+          "operationCount": 1000,
+          "threadCount": [31],
+          "workload": ["workloadb", "workloadc", "workloadd", "workloadf"]
+        }
+      ]
     }
   ]
 }
