@@ -53,6 +53,9 @@ Our provisioning script, in the context of Ubuntu 20.04, should be considered au
 Our installation process has three variations, each of which has a tradeoff in terms of faithfulness to our original setup, ease of use, and financial investment.
 
 In all cases, the included benchmark runner `./azurebench` will run all the experiments listed in `experiments.json` and deposit the results in `results/`.
+The `--settling-delay 20` flag is needed to run Ivy-Raft correctly, as it is unstable on start-up.
+Note that the `serverCount` key in the configuration JSON indicates how many servers an experiment will need, excluding one extra client machine.
+Therefore, a given experiment will need `serverCount + 1` machines.
 
 ### Manage machines with Vagrant
 
@@ -90,7 +93,7 @@ $ cp vagrant_static_server_map.json static_server_map.json
 Once this is done, the following command will run some simple experiments on those VMs:
 
 ```bash
-$ ./azurebench .
+$ ./azurebench --settling-delay 20 .
 ```
 
 ### Manage machines with Azure
@@ -102,7 +105,7 @@ Note down your tenant ID and your subscription ID.
 
 Once this is done, launching the provisioning and experiment running process can be done with this command:
 ```bash
-$ ./azurebench --azure-subscription <subscription ID> --azure-tenant-id <tenant ID> .
+$ ./azurebench --settling-delay 20 --azure-subscription <subscription ID> --azure-tenant-id <tenant ID> .
 ```
 
 Note that this will take a long time, possibly over an hour.
@@ -127,11 +130,16 @@ Note that this script is meant to run on a throwaway VM, and will make many chan
 
 Once the machines are set up, use `vagrant_static_server_map.json` as a template to inform the benchmark runner of the usernames and IP addresses of the provisioned machines.
 The resulting file should be named `static_server_map.json` for the runner to use it.
+If the runner picks up this file, it will not try to run `image/provision.sh` itself, unlike when running on an Azure machine.
+It will also not attempt to upload the contents of `image/` to each server, which it will otherwise do.
 
 Once everything is set up, the following command will start some simple experiments:
 ```bash
-$ ./azurebench .
+$ ./azurebench --settling-delay 20 .
 ```
+
+The template of machines with 8vCPUs and 32GB of RAM is an over-approximation, so it may be possible to run these experiments on less powerful machines.
+We have not studied how much the available system resources may be decreased without impacting the experiments.
 
 ## Experiment workflow
 
@@ -148,13 +156,19 @@ This is a small workload designed to ensure all kinds of experiment can be perfo
 The true set of experiments from the paper is in `experiments_full.json`.
 Copying that over to `experiments.json` will cause all experiments from the paper to be run in full.
 
+Note that for results describing peak throughput, our configuration lists the values at which we measured peak throughput on our machines.
+Results are known to vary even across different Azure VMs of the same type.
+To recreate meaningful results, we recommend initially testing each system with a single workload and cluster size, but different numbers of client threads.
+The number of client threads that causes the highest throughput should then be used to drive peak throughput for each system when comparing YCSB workloads and comparing cluster sizes.
+To make these changes, the relevant JSON key is `threadCount`.
+
 ## Evaluation and expected results
 
 To run our full set of experiments, run the following commands:
 
 ```bash
 $ cp experiments_full.json experiments.json
-$ ./azurebench . # specify Azure IDs if needed
+$ ./azurebench --settling-delay 20 . # specify Azure IDs if needed
 ```
 
 Once complete, `graphs-python.ipynb` can be used to parse data from `results/ and recreate each of the performance graphs from this paper.
@@ -164,4 +178,3 @@ Our existing data set is included under the name `results_paper/`.
 To test that the notebook is set up properly, you can copy that data over to `results/` and see the same graphs from the paper regenerated.
 
 We expect a recreation of our results to preserve the relationships between artifact performance numbers, but not the numbers themselves.
-
