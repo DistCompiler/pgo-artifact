@@ -153,14 +153,14 @@ All script dependencies for experiments exist in the `image/` folder, so a scrip
 
 On checkout, the initial contents of `experiments.json` is a copy of `experiments_simple.json`.
 This is a small workload designed to ensure all kinds of experiment can be performed.
-The true set of experiments from the paper is in `experiments_full.json`.
+The true set of experiments from the paper, including our machine-dependent tuning values, is in `experiments_full.json`.
 Copying that over to `experiments.json` will cause all experiments from the paper to be run in full.
 
-Note that for results describing peak throughput, our configuration lists the values at which we measured peak throughput on our machines.
+Note that for results describing peak throughput (Figures 3 and 5), our configuration lists the values at which we measured peak throughput on our machines.
 Results are known to vary even across different Azure VMs of the same type.
-To recreate meaningful results, we recommend initially testing each system with a single workload and cluster size, but different numbers of client threads.
-The number of client threads that causes the highest throughput should then be used to drive peak throughput for each system when comparing YCSB workloads and comparing cluster sizes.
-To make these changes, the relevant JSON key is `threadCount`.
+To recreate meaningful results, we recommend splitting the experiments into two passes: varying only the number of client threads, then varying workload and cluster size.
+This initial set of experiments is in `experiments_tuning.json`.
+The number of client threads that causes the highest throughput should then be edited into key `threadCount` of the template `experiments_tuned.json` which will gather data that depends on peak throughput.
 
 ## Evaluation and expected results
 
